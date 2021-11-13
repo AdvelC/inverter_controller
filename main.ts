@@ -2,7 +2,9 @@ function PressInverterButton () {
     pins.digitalWritePin(DigitalPin.P3, 1)
     basic.pause(200)
     pins.digitalWritePin(DigitalPin.P3, 0)
+    inverter_button_pressed = 1
 }
+let inverter_button_pressed = 0
 basic.showString("WAIT")
 basic.pause(5000)
 basic.forever(function () {
@@ -15,6 +17,7 @@ basic.forever(function () {
             PressInverterButton()
         }
     }
+    basic.pause(1000)
     if (pins.digitalReadPin(DigitalPin.P1) == 1) {
         basic.showString("ON")
     } else {
@@ -24,5 +27,9 @@ basic.forever(function () {
             basic.showString("??")
         }
     }
-    basic.pause(1000)
+    if (inverter_button_pressed) {
+        basic.pause(1000)
+    } else {
+    	
+    }
 })
